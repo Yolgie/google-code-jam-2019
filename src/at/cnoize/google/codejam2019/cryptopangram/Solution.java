@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
+// not handed in
 public class Solution {
     private static final String alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase();
 

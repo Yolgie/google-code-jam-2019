@@ -48,7 +48,7 @@ class SolutionTest {
     private static Stream<Arguments> provideForMarkSectionAs() {
         return Stream.of(
                 Arguments.of(
-                        Solution.BrokenState.DEFINITLY_BROKEN,
+                        Solution.BrokenState.DEFINITELY_BROKEN,
                         new ArrayList<>(Collections.nCopies(6, Solution.BrokenState.NOT_SET)),
                         4,
                         5,
@@ -57,10 +57,10 @@ class SolutionTest {
                                 Solution.BrokenState.NOT_SET,
                                 Solution.BrokenState.NOT_SET,
                                 Solution.BrokenState.NOT_SET,
-                                Solution.BrokenState.DEFINITLY_BROKEN,
-                                Solution.BrokenState.DEFINITLY_BROKEN)),
+                                Solution.BrokenState.DEFINITELY_BROKEN,
+                                Solution.BrokenState.DEFINITELY_BROKEN)),
                 Arguments.of(
-                        Solution.BrokenState.DEFINITLY_BROKEN,
+                        Solution.BrokenState.DEFINITELY_BROKEN,
                         new ArrayList<>(Collections.nCopies(6, Solution.BrokenState.NOT_SET)),
                         4,
                         4,
@@ -69,18 +69,18 @@ class SolutionTest {
                                 Solution.BrokenState.NOT_SET,
                                 Solution.BrokenState.NOT_SET,
                                 Solution.BrokenState.NOT_SET,
-                                Solution.BrokenState.DEFINITLY_BROKEN,
-                                Solution.BrokenState.DEFINITLY_BROKEN)),
+                                Solution.BrokenState.DEFINITELY_BROKEN,
+                                Solution.BrokenState.DEFINITELY_BROKEN)),
                 Arguments.of(
-                        Solution.BrokenState.DEFINITLY_BROKEN,
+                        Solution.BrokenState.DEFINITELY_BROKEN,
                         new ArrayList<>(Collections.nCopies(6, Solution.BrokenState.NOT_SET)),
                         4,
                         3,
                         ImmutableList.of(
-                                Solution.BrokenState.DEFINITLY_BROKEN,
-                                Solution.BrokenState.DEFINITLY_BROKEN,
-                                Solution.BrokenState.DEFINITLY_BROKEN,
-                                Solution.BrokenState.DEFINITLY_BROKEN,
+                                Solution.BrokenState.DEFINITELY_BROKEN,
+                                Solution.BrokenState.DEFINITELY_BROKEN,
+                                Solution.BrokenState.DEFINITELY_BROKEN,
+                                Solution.BrokenState.DEFINITELY_BROKEN,
                                 Solution.BrokenState.NOT_SET,
                                 Solution.BrokenState.NOT_SET))
         );

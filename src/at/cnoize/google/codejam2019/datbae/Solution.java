@@ -44,7 +44,7 @@ public class Solution {
     }
 
     public enum BrokenState {
-        NOT_SET, NOT_BROKEN, POSSIBLY_BROKEN, DEFINITLY_BROKEN
+        NOT_SET, NOT_BROKEN, POSSIBLY_BROKEN, DEFINITELY_BROKEN
     }
 
     public static List<Integer> findBrokenWorkers(int length, Map<Integer, String> testResults) {
@@ -54,7 +54,7 @@ public class Solution {
 
         for (Integer sectionLength : INPUT_SECTION_LENGTHS) {
             if (testResults.containsKey(sectionLength)) {
-                List<BrokenState> marks = findBrokenWorkersForTestresult(length, sectionLength, testResults.get(sectionLength), previous, previousSectionLength);
+                List<BrokenState> marks = findBrokenWorkersForTestResult(length, sectionLength, testResults.get(sectionLength), previous, previousSectionLength);
                 previous = marks;
                 previousSectionLength = sectionLength;
                 results.add(marks);
@@ -68,7 +68,7 @@ public class Solution {
             final Set<BrokenState> statesForIndex = results.stream()
                     .map(brokenStates -> brokenStates.get(index))
                     .collect(Collectors.toSet());
-            if (statesForIndex.contains(BrokenState.DEFINITLY_BROKEN)) {
+            if (statesForIndex.contains(BrokenState.DEFINITELY_BROKEN)) {
                 brokenIndices.add(i);
             }
         }
@@ -76,7 +76,7 @@ public class Solution {
         return brokenIndices;
     }
 
-    private static List<BrokenState> findBrokenWorkersForTestresult(final int length,
+    private static List<BrokenState> findBrokenWorkersForTestResult(final int length,
                                                                     final int sectionLength,
                                                                     final String testString,
                                                                     final List<BrokenState> previousMarks,
@@ -88,10 +88,10 @@ public class Solution {
             // handle previously fixed
             if (previousMarks != null
                     && (previousMarks.get(i).equals(BrokenState.NOT_BROKEN)
-                    || previousMarks.get(i).equals(BrokenState.DEFINITLY_BROKEN))) {
+                    || previousMarks.get(i).equals(BrokenState.DEFINITELY_BROKEN))) {
                 marks.set(i, previousMarks.get(i));
             }
-            if (marks.get(i).equals(BrokenState.DEFINITLY_BROKEN)) {
+            if (marks.get(i).equals(BrokenState.DEFINITELY_BROKEN)) {
                 offset--;
             }
             // handle new and previously possible
@@ -101,13 +101,13 @@ public class Solution {
                 marks.set(i, BrokenState.POSSIBLY_BROKEN);
                 offset--;
             }
-            if (previousMarks != null && ((i + 1) % previousSectionLength == 0 || i == length-1)) {
+            if (previousMarks != null && ((i + 1) % previousSectionLength == 0 || i == length - 1)) {
                 final int containedMarks = countContainedPossiblesInSection(marks, previousSectionLength, i);
                 final int containedMarksPrevious = countContainedPossiblesInSection(previousMarks, previousSectionLength, i);
                 final int difference = containedMarksPrevious - containedMarks;
                 if (difference != 0) {
                     marks = markLastInSectionAs(BrokenState.POSSIBLY_BROKEN, marks, previousSectionLength, i, difference);
-                    offset-= difference;
+                    offset -= difference;
                 }
             }
         }
@@ -117,7 +117,7 @@ public class Solution {
                 marks = markSectionAs(BrokenState.NOT_BROKEN, marks, sectionLength, i);
             }
             if (containedMarks.size() == 1 && containedMarks.contains(BrokenState.POSSIBLY_BROKEN)) {
-                marks = markSectionAs(BrokenState.DEFINITLY_BROKEN, marks, sectionLength, i);
+                marks = markSectionAs(BrokenState.DEFINITELY_BROKEN, marks, sectionLength, i);
             }
         }
         return marks;
@@ -155,7 +155,7 @@ public class Solution {
         final int sectionStartIndex = (index / sectionLength) * sectionLength;
         final int sectionEndIndex = Math.min(((index + sectionLength) / sectionLength) * sectionLength, marks.size());
         int set = 0;
-        for (int i = sectionEndIndex-1; i >= sectionStartIndex && set < count; i--) {
+        for (int i = sectionEndIndex - 1; i >= sectionStartIndex && set < count; i--) {
             if (!marks.get(i).equals(newState)) {
                 marks.set(i, newState);
                 set++;
